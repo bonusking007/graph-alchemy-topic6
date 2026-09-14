@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graph Alchemy Pro v1.2 - Full Set Nonisomorphic Directed Graphs Platform</title>
+  <title>Graph Alchemy Academy v2.0 - Nonisomorphic Directed Graphs</title>
   <style>
     :root {
       --bg: #070512;
@@ -208,6 +208,62 @@
     .crystal-hitbox:hover + .crystal-body { filter: drop-shadow(0 0 8px var(--energy)); }
     .edge-line { pointer-events: stroke; cursor: pointer; }
     .edge-line:hover { stroke: #ef4444 !important; stroke-width: 4px !important; }
+
+
+    /* ================= GUIDED LEARNING / PROFESSOR MODE ================= */
+    #view-learn.active { display: flex !important; flex-direction: column; gap: 18px; max-width: 1180px; margin: 0 auto; }
+    .hero-learn {
+      background: linear-gradient(135deg, rgba(147,51,234,.18), rgba(56,189,248,.10));
+      border: 1px solid var(--border); border-radius: 18px; padding: 24px;
+      display: grid; grid-template-columns: 1.4fr .8fr; gap: 18px; align-items: center;
+      box-shadow: 0 12px 32px rgba(0,0,0,.28);
+    }
+    .hero-learn h2 { font-size: 1.55rem; color: var(--magic-glow); margin-bottom: 8px; }
+    .hero-learn p { color: var(--subtext); line-height: 1.65; font-size: .92rem; }
+    .topic-pill { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; background:#0c081e; border:1px solid var(--border); color:var(--energy); font-size:.75rem; font-weight:800; margin-bottom:10px; }
+    .professor-card { background:#0c081e; border:1px solid rgba(192,132,252,.35); border-radius:14px; padding:16px; }
+    .professor-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; font-weight:800; color:var(--gold); }
+    .professor-avatar { width:46px; height:46px; border-radius:50%; display:grid; place-items:center; background:#181138; border:2px solid var(--magic-glow); font-size:1.5rem; box-shadow:0 0 18px rgba(192,132,252,.22); }
+    .learn-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .lesson-card { background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px; }
+    .lesson-card h3 { color:var(--energy); font-size:1rem; }
+    .lesson-card p, .lesson-card li { color:#cbd5e1; font-size:.84rem; line-height:1.6; }
+    .lesson-card ul { padding-left:18px; display:flex; flex-direction:column; gap:5px; }
+    .formula-box { background:#090616; border:1px dashed var(--border); border-radius:10px; padding:10px 12px; font-family:ui-monospace,Consolas,monospace; color:#e9d5ff; font-size:.8rem; line-height:1.65; }
+    .concept-demo { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:center; }
+    .mini-graph-demo { background:#0c081e; border:1px solid var(--border); border-radius:12px; min-height:150px; display:grid; place-items:center; padding:10px; }
+    .same-badge { font-size:1.4rem; color:var(--success); font-weight:900; }
+    .learn-check { background:#100b28; border:1px solid var(--border); border-radius:14px; padding:18px; }
+    .check-options { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .check-btn { background:#181138; color:var(--text); border:1px solid var(--border); border-radius:9px; padding:9px 14px; cursor:pointer; font-weight:700; }
+    .check-btn:hover { border-color:var(--magic-glow); }
+    .check-feedback { margin-top:10px; min-height:22px; font-size:.85rem; }
+    .learning-path { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .path-step { background:#0c081e; border:1px solid var(--border); border-radius:12px; padding:12px; text-align:center; }
+    .path-step b { display:block; color:var(--magic-glow); font-size:.85rem; margin-top:5px; }
+    .path-step span { color:var(--subtext); font-size:.72rem; }
+    .application-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .application-card { background:#0c081e; border:1px solid var(--border); border-radius:12px; padding:14px; }
+    .application-card h4 { color:var(--gold); margin-bottom:5px; font-size:.88rem; }
+    .application-card p { color:var(--subtext); font-size:.78rem; line-height:1.55; }
+    .cap-note { background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.45); border-radius:10px; padding:11px 13px; color:#fde68a; font-size:.8rem; line-height:1.55; }
+    .sub2-banner { background:linear-gradient(90deg,rgba(16,185,129,.12),rgba(56,189,248,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 14px; font-size:.8rem; color:#d1fae5; line-height:1.55; }
+
+    @media (max-width: 980px) {
+      header { flex-direction:column; gap:10px; align-items:stretch; }
+      .brand { justify-content:center; flex-wrap:wrap; }
+      .nav-tabs { overflow-x:auto; justify-content:flex-start; }
+      .nav-tab { white-space:nowrap; }
+      #view-alchemy.active { grid-template-columns:1fr; }
+      .alchemy-table { position:static; }
+      .hero-learn { grid-template-columns:1fr; }
+      .learn-grid { grid-template-columns:1fr; }
+      .learning-path { grid-template-columns:repeat(2,1fr); }
+      .application-grid { grid-template-columns:1fr; }
+      .quiz-graphs { grid-template-columns:1fr; }
+      .bench-metrics { grid-template-columns:1fr; }
+    }
+
   </style>
 </head>
 <body>
@@ -215,18 +271,139 @@
   <header>
     <div class="brand">
       <span style="font-size:1.3rem">🔮</span>
-      <h1>Graph Alchemy: Digraph Platform</h1>
-      <span class="version-tag">v1.2</span>
+      <h1>Graph Alchemy Academy: Nonisomorphic Digraphs</h1>
+      <span class="version-tag">TOPIC 6 · v2.0</span>
     </div>
     <div class="nav-tabs">
-      <button class="nav-tab active" onclick="switchView('alchemy')">แท่นแปรธาตุ (Lab)</button>
-      <button class="nav-tab" onclick="switchView('quiz')">โหมดทดสอบ Quiz (Sub 2)</button>
-      <button class="nav-tab" onclick="switchView('benchmark')">ทฤษฎี & Benchmark</button>
+      <button class="nav-tab active" data-view="learn" onclick="switchView('learn')">🎓 เรียนกับ Professor</button>
+      <button class="nav-tab" data-view="alchemy" onclick="switchView('alchemy')">🔮 Graph Lab</button>
+      <button class="nav-tab" data-view="quiz" onclick="switchView('quiz')">🧠 Quiz Arena</button>
+      <button class="nav-tab" data-view="benchmark" onclick="switchView('benchmark')">📚 Theory & Benchmark</button>
     </div>
   </header>
 
+
+  <!-- ================= VIEW 0: GUIDED LEARNING ================= -->
+  <main class="app-view active" id="view-learn">
+    <section class="hero-learn">
+      <div>
+        <div class="topic-pill">📘 CPE101 · Term Project Topic 6</div>
+        <h2>จาก “กราฟที่หน้าตาต่างกัน” สู่ “โครงสร้างที่ไม่ซ้ำกันจริง”</h2>
+        <p>
+          เป้าหมายของบทเรียนนี้คือเข้าใจว่า directed graph สองรูปอาจวาดคนละตำแหน่งและใช้ชื่อจุดยอดต่างกัน
+          แต่ยังเป็นโครงสร้างเดียวกันได้ ถ้ามีการจับคู่จุดยอดแบบหนึ่งต่อหนึ่งที่รักษาทิศทางของทุก edge ไว้
+          จากแนวคิดนี้ เราจะสร้าง <b>full set of nonisomorphic directed graphs</b> โดยเก็บตัวแทนเพียงหนึ่งกราฟต่อหนึ่งโครงสร้าง
+        </p>
+        <div class="sub2-banner" style="margin-top:14px">
+          ✅ โหมดนี้เตรียมไว้สำหรับ Submission 2 โดยตรง: <b>สอนทฤษฎี → ยกตัวอย่าง → แสดงการประยุกต์ → ให้ทำ Quiz</b>
+        </div>
+      </div>
+      <div class="professor-card">
+        <div class="professor-head"><div class="professor-avatar">🧙‍♂️</div><div>Professor Graphon</div></div>
+        <div id="professor-message" style="color:#cbd5e1; font-size:.84rem; line-height:1.65">
+          “อย่าตัดสินกราฟจากตำแหน่งที่วาดบนจอ ให้ดูว่าใครชี้ไปหาใครต่างหาก — นั่นคือโครงสร้างจริงของกราฟ”
+        </div>
+        <button class="btn-main" style="margin-top:12px; width:100%" onclick="switchView('alchemy')">เริ่มทดลองใน Graph Lab ➜</button>
+      </div>
+    </section>
+
+    <section class="learning-path">
+      <div class="path-step"><div>①</div><b>Directed Graph</b><span>เข้าใจ vertex และลูกศร</span></div>
+      <div class="path-step"><div>②</div><b>Isomorphism</b><span>เปลี่ยนชื่อได้ แต่โครงสร้างต้องเหมือน</span></div>
+      <div class="path-step"><div>③</div><b>Canonical Form</b><span>เลือกตัวแทนหนึ่งแบบต่อหนึ่งคลาส</span></div>
+      <div class="path-step"><div>④</div><b>Full Set</b><span>แสดงทุกคลาสที่ไม่ซ้ำกัน</span></div>
+    </section>
+
+    <section class="learn-grid">
+      <article class="lesson-card">
+        <h3>1) Directed Graph คืออะไร?</h3>
+        <p>Directed graph หรือ digraph ประกอบด้วยจุดยอด <b>V</b> และเส้นเชื่อมมีทิศทาง <b>E</b> เช่น A → B ไม่เท่ากับ B → A</p>
+        <div class="formula-box">
+          G = (V, E)<br>
+          V = {A, B, C}<br>
+          E = {(A,B), (B,C)}
+        </div>
+        <p>ในโปรเจกต์นี้กำหนดให้ <b>ไม่มี self-loop</b> ดังนั้นจุดยอดหนึ่งจุดจะไม่ชี้กลับเข้าหาตัวเอง</p>
+      </article>
+
+      <article class="lesson-card">
+        <h3>2) Graph Isomorphism คือหัวใจของ Topic 6</h3>
+        <p>กราฟ G และ H เป็น isomorphic กัน เมื่อมี bijection f ระหว่างจุดยอด และทุก directed edge ถูกเก็บรักษาไว้ภายใต้การเปลี่ยนชื่อจุดยอด</p>
+        <div class="formula-box">
+          (u → v) อยู่ใน G  ⇔  (f(u) → f(v)) อยู่ใน H
+        </div>
+        <p><b>ตำแหน่งที่วาด สี และชื่อจุดยอดไม่ใช่โครงสร้าง</b> สิ่งสำคัญคือรูปแบบการเชื่อมต่อและทิศทางของลูกศร</p>
+      </article>
+
+      <article class="lesson-card">
+        <h3>3) Invariant ใช้คัดกรอง แต่ไม่ใช่หลักฐานเสมอไป</h3>
+        <ul>
+          <li>จำนวน edges ต้องเท่ากัน ถ้าจะเป็น isomorphic</li>
+          <li>ชุดค่า in-degree / out-degree ต้องสอดคล้องกัน</li>
+          <li>จำนวน mutual pairs หรือ cycle บางชนิดช่วยแยกกราฟได้</li>
+        </ul>
+        <div class="cap-note">⚠️ ถ้า invariant บางตัว “เหมือนกัน” ยังสรุปไม่ได้ว่ากราฟ isomorphic ต้องตรวจ bijection หรือ canonical form ต่อ</div>
+      </article>
+
+      <article class="lesson-card">
+        <h3>4) Full Set หมายถึงอะไร?</h3>
+        <p>เริ่มจาก labelled digraphs ทุกแบบ แล้วรวมกราฟที่ isomorphic กันไว้ในคลาสเดียว จากนั้นเลือกตัวแทนเพียงหนึ่งกราฟต่อคลาส</p>
+        <div class="formula-box">
+          n = 2: labelled 4 แบบ → nonisomorphic 3 แบบ<br>
+          n = 3: labelled 64 แบบ → nonisomorphic 16 แบบ<br>
+          n = 4: labelled 4,096 แบบ → nonisomorphic 218 แบบ
+        </div>
+      </article>
+    </section>
+
+    <section class="lesson-card">
+      <h3>ตัวอย่างเร็ว: หน้าตาต่าง แต่โครงสร้างเดียวกัน</h3>
+      <div class="concept-demo">
+        <div class="mini-graph-demo">
+          <svg viewBox="0 0 220 130" width="220" height="130">
+            <defs><marker id="learnArrowA" markerWidth="8" markerHeight="8" refX="18" refY="4" orient="auto"><polygon points="0 1,7 4,0 7" fill="#38bdf8"/></marker></defs>
+            <line x1="60" y1="65" x2="160" y2="65" stroke="#38bdf8" stroke-width="3" marker-end="url(#learnArrowA)"/>
+            <circle cx="50" cy="65" r="18" fill="#f43f5e"/><circle cx="170" cy="65" r="18" fill="#06b6d4"/>
+            <text x="50" y="70" text-anchor="middle" fill="white" font-weight="bold">A</text><text x="170" y="70" text-anchor="middle" fill="white" font-weight="bold">B</text>
+          </svg>
+          <div style="font-size:.78rem;color:var(--subtext)">Graph G: A → B</div>
+        </div>
+        <div class="same-badge">≅</div>
+        <div class="mini-graph-demo">
+          <svg viewBox="0 0 220 130" width="220" height="130">
+            <defs><marker id="learnArrowB" markerWidth="8" markerHeight="8" refX="18" refY="4" orient="auto"><polygon points="0 1,7 4,0 7" fill="#38bdf8"/></marker></defs>
+            <line x1="160" y1="65" x2="60" y2="65" stroke="#38bdf8" stroke-width="3" marker-end="url(#learnArrowB)"/>
+            <circle cx="50" cy="65" r="18" fill="#06b6d4"/><circle cx="170" cy="65" r="18" fill="#f43f5e"/>
+            <text x="50" y="70" text-anchor="middle" fill="white" font-weight="bold">2</text><text x="170" y="70" text-anchor="middle" fill="white" font-weight="bold">1</text>
+          </svg>
+          <div style="font-size:.78rem;color:var(--subtext)">Graph H: 1 → 2</div>
+        </div>
+      </div>
+      <div class="formula-box">Bijection ตัวอย่าง: f(A)=1, f(B)=2 ⇒ edge A→B ถูกส่งไปเป็น 1→2 จึงเป็น isomorphic</div>
+    </section>
+
+    <section class="learn-check">
+      <h3 style="color:var(--gold); font-size:1rem">🧪 Quick Check ก่อนเข้าห้อง Lab</h3>
+      <p style="color:#cbd5e1; font-size:.84rem; margin-top:6px">ถ้ากราฟสองรูปมี degree sequence เหมือนกัน เราสรุปได้ทันทีหรือไม่ว่า isomorphic กัน?</p>
+      <div class="check-options">
+        <button class="check-btn" onclick="answerLearnCheck(true)">ได้ — เหมือนกันแน่นอน</button>
+        <button class="check-btn" onclick="answerLearnCheck(false)">ไม่ได้ — ต้องตรวจโครงสร้างต่อ</button>
+      </div>
+      <div class="check-feedback" id="learn-check-feedback"></div>
+    </section>
+
+    <section class="lesson-card">
+      <h3>การประยุกต์ใช้แนวคิด Isomorphism</h3>
+      <div class="application-grid">
+        <div class="application-card"><h4>🌐 Network Structure</h4><p>เปรียบเทียบเครือข่ายที่ใช้ชื่อ node ต่างกัน แต่มีรูปแบบการเชื่อมต่อเหมือนกัน เพื่อค้นหาโครงสร้างซ้ำ</p></div>
+        <div class="application-card"><h4>🔁 Workflow / State Models</h4><p>ระบบงานสองระบบอาจใช้ชื่อสถานะต่างกัน แต่โครงสร้างการเปลี่ยนสถานะเหมือนกัน จึงลดแบบจำลองที่ซ้ำได้</p></div>
+        <div class="application-card"><h4>🧩 Pattern Deduplication</h4><p>จัดกลุ่มกราฟที่เป็นโครงสร้างเดียวกันก่อนวิเคราะห์ ช่วยลดข้อมูลจาก labelled graphs จำนวนมากเหลือเฉพาะคลาสที่ไม่ซ้ำ</p></div>
+      </div>
+    </section>
+  </main>
+
   <!-- ================= VIEW 1: ALCHEMY WORKBENCH ================= -->
-  <main class="app-view active" id="view-alchemy">
+  <main class="app-view" id="view-alchemy">
     <section class="alchemy-table">
       <div class="table-header">
         <div class="level-select">
@@ -235,8 +412,12 @@
           <button class="btn-lvl active" onclick="switchLevel(3)">n = 3 (16)</button>
           <button class="btn-lvl" onclick="switchLevel(4)">n = 4 (218)</button>
         </div>
-        <button onclick="revealAll()" style="background:none; border:none; color:var(--subtext); font-size:0.75rem; cursor:pointer; text-decoration:underline">เฉลยทั้งหมด</button>
+        <div style="display:flex; gap:10px; align-items:center">
+          <button onclick="resetSavedProgress()" style="background:none; border:none; color:#fca5a5; font-size:0.72rem; cursor:pointer; text-decoration:underline">รีเซ็ตความคืบหน้า</button>
+          <button onclick="revealAll()" style="background:none; border:none; color:var(--subtext); font-size:0.75rem; cursor:pointer; text-decoration:underline">เฉลยทั้งหมด</button>
+        </div>
       </div>
+      <div class="cap-note">🧠 <b>ขอบเขตของตัวสร้าง:</b> โหมด interactive รองรับ n = 2–4 เพื่อให้ brute-force canonicalization ทำงานทันทีบนเบราว์เซอร์ ส่วน n ≥ 5 ใช้เพื่ออธิบายการเติบโตของปัญหาในหน้า Theory/Benchmark</div>
 
       <div class="canvas-container" id="canvas-wrapper">
         <div class="magic-circle"></div>
@@ -314,11 +495,11 @@
 
       <div class="quiz-graphs">
         <div class="graph-quiz-box">
-          <span style="font-size:0.8rem; color:var(--subtext); margin-bottom:4px">กราฟ $G_A$</span>
+          <span style="font-size:0.8rem; color:var(--subtext); margin-bottom:4px">กราฟ G_A</span>
           <svg id="quiz-svg-a" width="240" height="220"></svg>
         </div>
         <div class="graph-quiz-box">
-          <span style="font-size:0.8rem; color:var(--subtext); margin-bottom:4px">กราฟ $G_B$ (สลับชื่อจุดยอด)</span>
+          <span style="font-size:0.8rem; color:var(--subtext); margin-bottom:4px">กราฟ G_B</span>
           <svg id="quiz-svg-b" width="240" height="220"></svg>
         </div>
       </div>
@@ -345,6 +526,17 @@
         <button class="btn-main" onclick="runLiveBenchmark()" style="padding:8px 20px">⚡ รันการทดสอบสด (Run Benchmark)</button>
       </div>
 
+
+      <div class="lesson-card" style="background:#0c081e">
+        <h3>Canonical Form ที่ระบบใช้</h3>
+        <p>สำหรับกราฟที่มี n จุดยอด ระบบลองสลับชื่อจุดยอดทุก permutation จำนวน n! แบบ แล้วเข้ารหัส adjacency เป็น bit mask จากนั้นเลือกค่าที่เล็กที่สุดเป็น canonical representative</p>
+        <div class="formula-box">
+          canonical(G) = min { encode(π(G)) : π เป็น permutation ของ V }<br>
+          G ≅ H ⇔ canonical(G) = canonical(H)
+        </div>
+        <div class="cap-note">⏱️ วิธีนี้ถูกต้องสำหรับ n เล็ก แต่จำนวนงานโตเร็วประมาณ 2^(n(n−1)) × n! จึงตั้งใจจำกัด Live Generator ไว้ที่ n ≤ 4 ในเวอร์ชันสาธิต</div>
+      </div>
+
       <div class="live-bench-box">
         <div class="bench-metrics">
           <div class="metric-card">
@@ -362,41 +554,41 @@
         </div>
       </div>
 
-      <h3 style="color:var(--energy); margin-top:6px">ตารางเปรียบเทียบขนาดข้อมูล (OEIS A000273)</h3>
+      <h3 style="color:var(--energy); margin-top:6px">ตารางเปรียบเทียบขนาดข้อมูลของ loopless directed graphs</h3>
       <table class="bench-table">
         <thead>
           <tr>
             <th>จำนวนจุดยอด ($n$)</th>
-            <th>เส้นเชื่อมสูงสุด ($n(n-1)$)</th>
-            <th>กราฟทั้งหมด ($2^{n(n-1)}$)</th>
+            <th>เส้นเชื่อมสูงสุด n(n−1)</th>
+            <th>กราฟทั้งหมด 2^(n(n−1))</th>
             <th>Non-Isomorphic Classes (Full Set)</th>
             <th>อัตราการลดรูป (Quotient Reduction)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>$n = 2$</td>
+            <td>n = 2</td>
             <td>2</td>
             <td>4</td>
             <td><b>3</b></td>
             <td>ลดรูป 25.00%</td>
           </tr>
           <tr>
-            <td>$n = 3$</td>
+            <td>n = 3</td>
             <td>6</td>
             <td>64</td>
             <td><b>16</b></td>
             <td>ลดรูป 75.00%</td>
           </tr>
           <tr>
-            <td>$n = 4$</td>
+            <td>n = 4</td>
             <td>12</td>
             <td>4,096</td>
             <td><b>218</b></td>
             <td>ลดรูป 94.68%</td>
           </tr>
           <tr>
-            <td>$n = 5$</td>
+            <td>n = 5 <span style="color:var(--gold);font-size:.72rem">(reference only)</span></td>
             <td>20</td>
             <td>1,048,576</td>
             <td><b>9,608</b></td>
@@ -407,9 +599,9 @@
 
       <div class="changelog-box">
         <h4 style="color:var(--gold); margin-bottom:4px">ประวัติเวอร์ชันระบบ (Version History)</h4>
-        <div>• <b>v1.2 (Current):</b> Hotfix: แก้ไข CSS Specificity สำหรับหน้า Quiz Arena และ Benchmark พร้อมปรับปรุงระบบแสดงผลเส้นโค้งลูกศร</div>
-        <div>• <b>v1.1:</b> เพิ่มระบบคำใบ้ 3 ระดับ (Smart Hint) และรองรับระบบ Full Set Codex $n=4$ (218 แบบ)</div>
-        <div>• <b>v1.0:</b> ปล่อยระบบกระดานแปรธาตุ (Alchemy Lab) และระบบตรวจจับ Graph Isomorphism ขั้นพื้นฐาน</div>
+        <div>• <b>v2.0 (Current):</b> เพิ่ม Professor Mode สำหรับสอนพื้นฐาน, Application, Quick Check, Local Progress และแก้คำอธิบาย Quiz ให้ไม่สรุปจาก degree sequence เกินจริง</div>
+        <div>• <b>v1.2:</b> ปรับ Quiz Arena, Benchmark และการแสดงลูกศรแบบสองทิศ</div>
+        <div>• <b>v1.0:</b> เปิดตัว Graph Lab และ Full Set Codex สำหรับ n = 2–4</div>
       </div>
     </div>
   </main>
@@ -421,6 +613,30 @@
     let selectedSource = null;
     let edgeFilter = 'all';
     let ghostMatrix = null;
+    const PROGRESS_KEY = 'graphAlchemyTopic6ProgressV2';
+
+    function readProgress() {
+      try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); } catch (e) { return {}; }
+    }
+    function writeProgress(data) { try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(data)); } catch (e) {} }
+    function loadProgressForN() {
+      const saved = readProgress();
+      const masks = new Set(saved[n] || []);
+      fullSet.forEach(item => item.unlocked = masks.has(item.mask));
+    }
+    function saveProgressForN() {
+      const saved = readProgress();
+      saved[n] = fullSet.filter(item => item.unlocked).map(item => item.mask);
+      writeProgress(saved);
+    }
+    function resetSavedProgress() {
+      const saved = readProgress();
+      delete saved[n];
+      writeProgress(saved);
+      fullSet.forEach(item => item.unlocked = false);
+      renderCodex(); updateUIStats();
+      document.getElementById('feed-box').innerHTML = `🧹 รีเซ็ตความคืบหน้าของ n=${n} แล้ว`;
+    }
 
     const colors = ['#f43f5e', '#06b6d4', '#10b981', '#f59e0b'];
     let audioCtx = null;
@@ -445,17 +661,25 @@
     function switchView(viewName) {
       document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+      const tab = document.querySelector(`.nav-tab[data-view="${viewName}"]`);
+      const view = document.getElementById(`view-${viewName}`);
+      if (tab) tab.classList.add('active');
+      if (view) view.classList.add('active');
+      if (viewName === 'quiz') generateQuizQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-      if (viewName === 'alchemy') {
-        document.querySelector('.nav-tab:nth-child(1)').classList.add('active');
-        document.getElementById('view-alchemy').classList.add('active');
-      } else if (viewName === 'quiz') {
-        document.querySelector('.nav-tab:nth-child(2)').classList.add('active');
-        document.getElementById('view-quiz').classList.add('active');
-        generateQuizQuestion();
-      } else if (viewName === 'benchmark') {
-        document.querySelector('.nav-tab:nth-child(3)').classList.add('active');
-        document.getElementById('view-benchmark').classList.add('active');
+    function answerLearnCheck(choseTrue) {
+      const box = document.getElementById('learn-check-feedback');
+      if (!box) return;
+      if (choseTrue) {
+        box.style.color = 'var(--danger)';
+        box.innerHTML = '❌ ยังสรุปไม่ได้ครับ — degree sequence ที่เหมือนกันเป็นเพียงเงื่อนไขจำเป็นบางส่วน ไม่ใช่หลักฐานว่า isomorphic เสมอ';
+        playSound(180, 0.2, 'sawtooth');
+      } else {
+        box.style.color = 'var(--success)';
+        box.innerHTML = '✅ ถูกต้อง! ต้องตรวจการจับคู่จุดยอด (bijection) หรือเปรียบเทียบ canonical form ต่อ';
+        playSound(880, 0.2, 'triangle');
       }
     }
 
@@ -535,6 +759,7 @@
     function initEngine() {
       engine = generateFullSet(n);
       fullSet = engine.list;
+      loadProgressForN();
       selectedSource = null;
       edgeFilter = 'all';
       ghostMatrix = null;
@@ -726,7 +951,7 @@
     function requestSmartHint() {
       let lockedCards = fullSet.filter(x => !x.unlocked);
       if (lockedCards.length === 0) {
-        document.getElementById('feed-box').innerHTML = `🎉 คุณปลดล็อกคัมภีร์ Full Set ขนาด $n=${n}$ ครบทั้งหมดแล้ว ไม่จำเป็นต้องใช้คำใบ้!`;
+        document.getElementById('feed-box').innerHTML = `🎉 คุณปลดล็อกคัมภีร์ Full Set ขนาด n=${n} ครบทั้งหมดแล้ว ไม่จำเป็นต้องใช้คำใบ้!`;
         return;
       }
 
@@ -801,6 +1026,7 @@
 
         if (!target.unlocked) {
           target.unlocked = true;
+          saveProgressForN();
           playSound(880, 0.3, 'triangle');
           updateCardContent(matchIndex);
           cardEl = document.getElementById(`card-${matchIndex}`);
@@ -940,11 +1166,12 @@
 
     function revealAll() {
       fullSet.forEach(item => item.unlocked = true);
+      saveProgressForN();
       renderCodex();
       updateUIStats();
       ghostMatrix = null;
       renderWorkbench();
-      document.getElementById('feed-box').innerHTML = `📖 ปลดล็อกคัมภีร์ Full Set ขนาด $n=${n}$ ครบทั้งหมดเรียบร้อยแล้ว`;
+      document.getElementById('feed-box').innerHTML = `📖 ปลดล็อกคัมภีร์ Full Set ขนาด n=${n} ครบทั้งหมดเรียบร้อยแล้ว`;
     }
 
     /* ================= TAB 2: QUIZ ARENA ================= */
@@ -1033,56 +1260,93 @@
       renderStaticSVG('quiz-svg-b', currentMatB, n);
     }
 
+    function canonicalMaskForMatrix(mat) {
+      const size = mat.length;
+      const pairs = [];
+      for (let i = 0; i < size; i++) for (let j = 0; j < size; j++) if (i !== j) pairs.push([i,j]);
+      const perms = getPermutations([...Array(size).keys()]);
+      let best = Infinity;
+      for (const p of perms) {
+        let mask = 0;
+        for (let k = 0; k < pairs.length; k++) {
+          const [u,v] = pairs[k];
+          if (mat[u][v]) {
+            const pu = p[u], pv = p[v];
+            const idx = pairs.findIndex(([x,y]) => x === pu && y === pv);
+            mask |= (1 << idx);
+          }
+        }
+        if (mask < best) best = mask;
+      }
+      return best;
+    }
+
+    function graphInvariantSummary(mat) {
+      const size = mat.length;
+      let edges = 0, mutualPairs = 0;
+      const degreePairs = [];
+      for (let i = 0; i < size; i++) {
+        let outD = 0, inD = 0;
+        for (let j = 0; j < size; j++) { outD += mat[i][j]; inD += mat[j][i]; }
+        edges += outD;
+        degreePairs.push(`${inD}/${outD}`);
+      }
+      for (let i = 0; i < size; i++) for (let j = i + 1; j < size; j++) if (mat[i][j] && mat[j][i]) mutualPairs++;
+      return { edges, mutualPairs, degreePairs: degreePairs.sort() };
+    }
+
     function answerQuiz(userGuess) {
       document.getElementById('quiz-btn-group').style.display = 'none';
       document.getElementById('btn-next-quiz').style.display = 'block';
       const explainer = document.getElementById('quiz-explainer');
       explainer.style.display = 'flex';
 
-      let isCorrect = userGuess === currentQuizAnswer;
+      const canonA = canonicalMaskForMatrix(currentMatA);
+      const canonB = canonicalMaskForMatrix(currentMatB);
+      const verifiedIso = canonA === canonB;
+      currentQuizAnswer = verifiedIso;
+      const isCorrect = userGuess === verifiedIso;
 
       if (isCorrect) {
-        quizScore += 10;
-        quizStreak++;
-        playSound(880, 0.25, 'triangle');
+        quizScore += 10; quizStreak++; playSound(880, 0.25, 'triangle');
       } else {
-        quizStreak = 0;
-        playSound(180, 0.3, 'sawtooth');
+        quizStreak = 0; playSound(180, 0.3, 'sawtooth');
       }
-
       document.getElementById('quiz-score').innerText = quizScore;
       document.getElementById('quiz-streak').innerText = quizStreak;
 
-      if (currentQuizAnswer) {
-        let mappingText = currentPermB.map((toNode, fromNode) => `${String.fromCharCode(65 + fromNode)} ➔ ${String.fromCharCode(65 + toNode)}`).join(', ');
+      if (verifiedIso) {
+        let mappingText = currentPermB
+          ? currentPermB.map((toNode, fromNode) => `${String.fromCharCode(65 + fromNode)} → ${String.fromCharCode(65 + toNode)}`).join(', ')
+          : 'มี permutation อย่างน้อยหนึ่งแบบที่รักษา adjacency ทั้งหมด';
         explainer.innerHTML = `
           <div style="color:${isCorrect ? 'var(--success)' : 'var(--danger)'}; font-weight:bold; font-size:1rem">
-            ${isCorrect ? '🎉 ถูกต้อง! กราฟทั้งสองเป็น Isomorphic กัน' : '❌ ตอบผิด! กราฟทั้งสองเป็น Isomorphic กันจริง'}
+            ${isCorrect ? '🎉 ถูกต้อง! กราฟทั้งสองเป็น Isomorphic กัน' : '❌ ตอบผิด — กราฟทั้งสองเป็น Isomorphic กัน'}
           </div>
-          <div><b>การพิสูจน์ (Proof of Bijection):</b> มีฟังก์ชันหนึ่งต่อหนึ่งและทั่วถึงที่จับคู่จุดยอดได้ดังนี้: <code>${mappingText}</code></div>
-          <div style="color:var(--subtext)">เมื่อเรียงลำดับจุดยอดตามฟังก์ชันนี้ เมทริกซ์ประชิดของทั้งสองกราฟจะเท่ากันทุกประการ ($A_B = P A_A P^T$)</div>
+          <div><b>Proof idea:</b> สามารถเปลี่ยนชื่อจุดยอดด้วย bijection แล้วรักษาทิศทางของทุก edge ได้</div>
+          <div><code>${mappingText}</code></div>
+          <div style="color:var(--subtext)">ระบบตรวจซ้ำด้วย canonical form และได้ค่าเดียวกัน: <code>${canonA}</code></div>
         `;
       } else {
-        let degA = currentMatA.map((row, i) => {
-          let outD = row.reduce((a, b) => a + b, 0);
-          let inD = currentMatA.reduce((sum, r) => sum + r[i], 0);
-          return `(in:${inD}, out:${outD})`;
-        }).sort().join(', ');
-
-        let degB = currentMatB.map((row, i) => {
-          let outD = row.reduce((a, b) => a + b, 0);
-          let inD = currentMatB.reduce((sum, r) => sum + r[i], 0);
-          return `(in:${inD}, out:${outD})`;
-        }).sort().join(', ');
-
+        const a = graphInvariantSummary(currentMatA);
+        const b = graphInvariantSummary(currentMatB);
+        let reason = '';
+        if (a.edges !== b.edges) {
+          reason = `จำนวน edges ต่างกัน (${a.edges} กับ ${b.edges}) ซึ่งเป็น graph invariant จึงเป็นไปไม่ได้ที่จะ isomorphic`;
+        } else if (a.degreePairs.join('|') !== b.degreePairs.join('|')) {
+          reason = `ชุดคู่ degree (in/out) ต่างกัน: G_A=[${a.degreePairs.join(', ')}], G_B=[${b.degreePairs.join(', ')}]`;
+        } else if (a.mutualPairs !== b.mutualPairs) {
+          reason = `จำนวนคู่ลูกศรสวนทาง (mutual pairs) ต่างกัน (${a.mutualPairs} กับ ${b.mutualPairs})`;
+        } else {
+          reason = `invariant พื้นฐานที่แสดงอาจเหมือนกัน แต่ระบบลองการจับคู่จุดยอดครบทั้ง ${engine.perms.length} permutations แล้ว ไม่มี bijection ใดรักษา adjacency ทั้งหมดได้`;
+        }
         explainer.innerHTML = `
           <div style="color:${isCorrect ? 'var(--success)' : 'var(--danger)'}; font-weight:bold; font-size:1rem">
-            ${isCorrect ? '🎉 ถูกต้อง! กราฟทั้งสองเป็น Non-Isomorphic (คนละโครงสร้าง)' : '❌ ตอบผิด! กราฟทั้งสองเป็นคนละโครงสร้างกัน'}
+            ${isCorrect ? '🎉 ถูกต้อง! กราฟทั้งสองเป็น Non-Isomorphic' : '❌ ตอบผิด — กราฟทั้งสองเป็น Non-Isomorphic'}
           </div>
-          <div><b>การพิสูจน์ด้วย Graph Invariant:</b></div>
-          <div>• Degree Sequence ของ $G_A$: <code>[${degA}]</code></div>
-          <div>• Degree Sequence ของ $G_B$: <code>[${degB}]</code></div>
-          <div style="color:var(--gold)">เนื่องจาก Invariant พื้นฐานไม่ตรงกัน จึงไม่มี Bijection ใดทำให้กราฟเท่ากันได้</div>
+          <div><b>เหตุผล:</b> ${reason}</div>
+          <div style="color:var(--subtext)">Canonical forms ต่างกัน: <code>${canonA}</code> ≠ <code>${canonB}</code> จึงอยู่คนละ isomorphism class</div>
+          <div style="color:var(--gold)">หมายเหตุ: degree sequence ที่เหมือนกันเพียงอย่างเดียว ไม่เพียงพอสำหรับพิสูจน์ว่า isomorphic</div>
         `;
       }
     }
@@ -1107,6 +1371,7 @@
     }
 
     initEngine();
+    switchView('learn');
   </script>
 </body>
 </html>
