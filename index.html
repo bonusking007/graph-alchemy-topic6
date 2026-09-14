@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graph Alchemy Academy v2.0 - Nonisomorphic Directed Graphs</title>
+  <title>Graph Alchemy Academy v2.1 - Nonisomorphic Directed Graphs</title>
   <style>
     :root {
       --bg: #070512;
@@ -249,6 +249,58 @@
     .cap-note { background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.45); border-radius:10px; padding:11px 13px; color:#fde68a; font-size:.8rem; line-height:1.55; }
     .sub2-banner { background:linear-gradient(90deg,rgba(16,185,129,.12),rgba(56,189,248,.08)); border:1px solid rgba(16,185,129,.35); border-radius:12px; padding:12px 14px; font-size:.8rem; color:#d1fae5; line-height:1.55; }
 
+
+
+    /* Floating AI Mentor */
+    .ai-mentor-wrap {
+      position: fixed; right: 20px; bottom: 18px; z-index: 9999;
+      display: flex; align-items: flex-end; gap: 12px; pointer-events: none;
+    }
+    .ai-mentor-bubble {
+      width: min(360px, calc(100vw - 120px)); background: rgba(17,13,38,.96);
+      border: 2px solid var(--energy); border-radius: 16px; padding: 12px 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.48), 0 0 18px rgba(56,189,248,.14);
+      position: relative; transform-origin: bottom right; animation: mentorPop .24s ease;
+      pointer-events: auto;
+    }
+    .ai-mentor-bubble::after {
+      content: ''; position: absolute; right: -11px; bottom: 20px;
+      border-width: 9px 0 9px 11px; border-style: solid;
+      border-color: transparent transparent transparent var(--mentor-border, var(--energy));
+    }
+    .ai-mentor-bubble.error { --mentor-border: var(--danger); border-color: var(--danger); box-shadow: 0 10px 30px rgba(0,0,0,.48), 0 0 18px rgba(239,68,68,.18); }
+    .ai-mentor-bubble.success { --mentor-border: var(--success); border-color: var(--success); box-shadow: 0 10px 30px rgba(0,0,0,.48), 0 0 18px rgba(16,185,129,.18); }
+    .ai-mentor-bubble.hint { --mentor-border: var(--gold); border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,.48), 0 0 18px rgba(245,158,11,.18); }
+    .ai-mentor-title { display:flex; justify-content:space-between; gap:10px; align-items:center; font-size:.8rem; font-weight:900; color:var(--energy); margin-bottom:5px; }
+    .ai-mentor-bubble.error .ai-mentor-title { color:var(--danger); }
+    .ai-mentor-bubble.success .ai-mentor-title { color:var(--success); }
+    .ai-mentor-bubble.hint .ai-mentor-title { color:var(--gold); }
+    .ai-mentor-close { color:var(--subtext); cursor:pointer; font-weight:700; font-size:.72rem; white-space:nowrap; }
+    .ai-mentor-text { color:#eef2ff; font-size:.82rem; line-height:1.48; }
+    .ai-mentor-avatar {
+      width: 74px; height: 74px; flex: 0 0 74px; border-radius: 50%; background:#0b1020;
+      border:3px solid var(--energy); display:flex; justify-content:center; align-items:center;
+      position:relative; cursor:pointer; pointer-events:auto;
+      box-shadow:0 0 18px rgba(56,189,248,.32); animation:mentorFloat 3s ease-in-out infinite;
+    }
+    .ai-mentor-avatar.error { border-color:var(--danger); animation:mentorShake .4s ease; }
+    .ai-mentor-avatar.success { border-color:var(--success); animation:mentorBounce .45s ease; }
+    .ai-mentor-avatar.hint { border-color:var(--gold); animation:mentorBounce .45s ease; }
+    .ai-mentor-antenna { position:absolute; top:-13px; width:4px; height:12px; border-radius:3px; background:var(--energy); }
+    .ai-mentor-antenna::after { content:''; position:absolute; left:-3px; top:-7px; width:10px; height:10px; border-radius:50%; background:var(--gold); box-shadow:0 0 9px var(--gold); }
+    .ai-mentor-face { width:46px; height:31px; border-radius:10px; background:#18233b; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; border:1px solid #334155; }
+    .ai-mentor-eyes { display:flex; gap:11px; }
+    .ai-mentor-eye { width:7px; height:7px; border-radius:50%; background:var(--energy); box-shadow:0 0 6px var(--energy); }
+    .ai-mentor-mouth { width:12px; height:3px; border-radius:2px; background:var(--energy); }
+    .ai-mentor-avatar.error .ai-mentor-eye, .ai-mentor-avatar.error .ai-mentor-mouth { background:var(--danger); box-shadow:0 0 6px var(--danger); }
+    .ai-mentor-avatar.success .ai-mentor-eye, .ai-mentor-avatar.success .ai-mentor-mouth { background:var(--success); box-shadow:0 0 6px var(--success); }
+    .ai-mentor-avatar.hint .ai-mentor-eye, .ai-mentor-avatar.hint .ai-mentor-mouth { background:var(--gold); box-shadow:0 0 6px var(--gold); }
+    .ai-mentor-wrap.minimized .ai-mentor-bubble { display:none; }
+    @keyframes mentorFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+    @keyframes mentorPop { from{opacity:0;transform:scale(.82)} to{opacity:1;transform:scale(1)} }
+    @keyframes mentorShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 50%{transform:translateX(7px)} 75%{transform:translateX(-4px)} }
+    @keyframes mentorBounce { 0%,100%{transform:translateY(0) scale(1)} 45%{transform:translateY(-10px) scale(1.07)} }
+
     @media (max-width: 980px) {
       header { flex-direction:column; gap:10px; align-items:stretch; }
       .brand { justify-content:center; flex-wrap:wrap; }
@@ -262,6 +314,9 @@
       .application-grid { grid-template-columns:1fr; }
       .quiz-graphs { grid-template-columns:1fr; }
       .bench-metrics { grid-template-columns:1fr; }
+      .ai-mentor-wrap { right:10px; bottom:10px; gap:8px; }
+      .ai-mentor-avatar { width:62px; height:62px; flex-basis:62px; }
+      .ai-mentor-bubble { width:min(320px, calc(100vw - 92px)); }
     }
 
   </style>
@@ -272,7 +327,7 @@
     <div class="brand">
       <span style="font-size:1.3rem">🔮</span>
       <h1>Graph Alchemy Academy: Nonisomorphic Digraphs</h1>
-      <span class="version-tag">TOPIC 6 · v2.0</span>
+      <span class="version-tag">TOPIC 6 · v2.1</span>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" data-view="learn" onclick="switchView('learn')">🎓 เรียนกับ Professor</button>
@@ -606,6 +661,27 @@
     </div>
   </main>
 
+
+  <!-- Floating AI Mentor -->
+  <div class="ai-mentor-wrap" id="ai-mentor-wrap">
+    <div class="ai-mentor-bubble" id="ai-mentor-bubble">
+      <div class="ai-mentor-title">
+        <span id="ai-mentor-title">🤖 Graph Mentor</span>
+        <span class="ai-mentor-close" onclick="toggleMentor()">ซ่อนข้อความ</span>
+      </div>
+      <div class="ai-mentor-text" id="ai-mentor-text">
+        สวัสดี! ผมช่วยวิเคราะห์ directed graph ให้ได้ ลองสร้างลูกศรแล้วกด <b>Transmute</b> เพื่อดูว่ากราฟของคุณอยู่ใน nonisomorphic class ใด
+      </div>
+    </div>
+    <div class="ai-mentor-avatar" id="ai-mentor-avatar" onclick="toggleMentor()" title="Graph Mentor">
+      <div class="ai-mentor-antenna"></div>
+      <div class="ai-mentor-face">
+        <div class="ai-mentor-eyes"><span class="ai-mentor-eye"></span><span class="ai-mentor-eye"></span></div>
+        <div class="ai-mentor-mouth"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     let n = 3;
     let fullSet = [];
@@ -681,6 +757,48 @@
         box.innerHTML = '✅ ถูกต้อง! ต้องตรวจการจับคู่จุดยอด (bijection) หรือเปรียบเทียบ canonical form ต่อ';
         playSound(880, 0.2, 'triangle');
       }
+    }
+
+
+    function showMentor(title, message, type = 'info') {
+      const wrap = document.getElementById('ai-mentor-wrap');
+      const bubble = document.getElementById('ai-mentor-bubble');
+      const avatar = document.getElementById('ai-mentor-avatar');
+      if (!wrap || !bubble || !avatar) return;
+      wrap.classList.remove('minimized');
+      bubble.className = `ai-mentor-bubble ${type === 'info' ? '' : type}`;
+      avatar.className = `ai-mentor-avatar ${type === 'info' ? '' : type}`;
+      document.getElementById('ai-mentor-title').innerHTML = title;
+      document.getElementById('ai-mentor-text').innerHTML = message;
+      setTimeout(() => { if (avatar) avatar.className = 'ai-mentor-avatar'; }, 520);
+    }
+
+    function toggleMentor() {
+      const wrap = document.getElementById('ai-mentor-wrap');
+      if (wrap) wrap.classList.toggle('minimized');
+    }
+
+    function straightEdgePoints(u, v, radius = 22) {
+      const dx = v.x - u.x, dy = v.y - u.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const ux = dx / len, uy = dy / len;
+      return { sx:u.x + ux*radius, sy:u.y + uy*radius, ex:v.x - ux*radius, ey:v.y - uy*radius };
+    }
+
+    function curvedEdgePath(u, v, bend = 0.22, radius = 22) {
+      const dx = v.x - u.x, dy = v.y - u.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const mx = (u.x + v.x) / 2 - dy * bend;
+      const my = (u.y + v.y) / 2 + dx * bend;
+      let sdx = mx - u.x, sdy = my - u.y;
+      let sl = Math.hypot(sdx, sdy) || 1;
+      let edx = v.x - mx, edy = v.y - my;
+      let el = Math.hypot(edx, edy) || 1;
+      const sx = u.x + (sdx/sl)*radius;
+      const sy = u.y + (sdy/sl)*radius;
+      const ex = v.x - (edx/el)*radius;
+      const ey = v.y - (edy/el)*radius;
+      return `M${sx},${sy} Q${mx},${my} ${ex},${ey}`;
     }
 
     /* Bitwise Permutation Engine */
@@ -776,6 +894,7 @@
       selectedSource = null;
       document.getElementById('bijection-box').style.display = 'none';
       document.getElementById('feed-box').innerHTML = `🌟 กระดานพร้อมใช้งาน: คลิกเชื่อมผลึกเพื่อค้นหาโครงสร้างใหม่`;
+      showMentor('🤖 Graph Mentor', `เริ่มจากเลือก <b>จุดยอดต้นทาง</b> แล้วเลือกจุดยอดปลายทางเพื่อสร้าง directed edge จากนั้นกด <b>Transmute</b> เพื่อจำแนก isomorphism class`, 'info');
       renderWorkbench();
       updateMathPanel();
     }
@@ -799,14 +918,14 @@
 
       svgEl.innerHTML = `
         <defs>
-          <marker id="arrow" markerWidth="8" markerHeight="8" refX="24" refY="4" orient="auto">
-            <polygon points="0 1, 7 4, 0 7" fill="#38bdf8" />
+          <marker id="arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
           </marker>
-          <marker id="arrow-bi" markerWidth="8" markerHeight="8" refX="24" refY="4" orient="auto">
-            <polygon points="0 1, 7 4, 0 7" fill="#c084fc" />
+          <marker id="arrow-bi" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#c084fc" />
           </marker>
-          <marker id="arrow-ghost" markerWidth="8" markerHeight="8" refX="24" refY="4" orient="auto">
-            <polygon points="0 1, 7 4, 0 7" fill="#eab308" />
+          <marker id="arrow-ghost" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#eab308" />
           </marker>
         </defs>
         <g id="ghost-layer"></g>
@@ -893,8 +1012,9 @@
           for (let j = 0; j < n; j++) {
             if (ghostMatrix[i][j] === 1) {
               let u = nodeCoords[i], v = nodeCoords[j];
+              let gp = straightEdgePoints(u, v, 22);
               ghostGroup.innerHTML += `
-                <line x1="${u.x}" y1="${u.y}" x2="${v.x}" y2="${v.y}" stroke="#eab308" stroke-width="3" stroke-dasharray="6" opacity="0.6" marker-end="url(#arrow-ghost)" />
+                <line x1="${gp.sx}" y1="${gp.sy}" x2="${gp.ex}" y2="${gp.ey}" stroke="#eab308" stroke-width="3" stroke-dasharray="6" opacity="0.6" marker-end="url(#arrow-ghost)" />
               `;
             }
           }
@@ -908,15 +1028,14 @@
             let isBi = matrix[j][i] === 1;
 
             if (isBi) {
-              let dx = v.x - u.x, dy = v.y - u.y;
-              let mx = (u.x + v.x) / 2 - dy * 0.18;
-              let my = (u.y + v.y) / 2 + dx * 0.18;
+              let d = curvedEdgePath(u, v, 0.22, 22);
               edgesGroup.innerHTML += `
-                <path class="edge-line" d="M${u.x},${u.y} Q${mx},${my} ${v.x},${v.y}" fill="none" stroke="#c084fc" stroke-width="2.5" marker-end="url(#arrow-bi)" onclick="removeEdge(${i}, ${j})" />
+                <path class="edge-line" d="${d}" fill="none" stroke="#c084fc" stroke-width="2.5" marker-end="url(#arrow-bi)" onclick="removeEdge(${i}, ${j})" />
               `;
             } else {
+              let p = straightEdgePoints(u, v, 22);
               edgesGroup.innerHTML += `
-                <line class="edge-line" x1="${u.x}" y1="${u.y}" x2="${v.x}" y2="${v.y}" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)" onclick="removeEdge(${i}, ${j})" />
+                <line class="edge-line" x1="${p.sx}" y1="${p.sy}" x2="${p.ex}" y2="${p.ey}" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arrow)" onclick="removeEdge(${i}, ${j})" />
               `;
             }
           }
@@ -976,6 +1095,7 @@
       renderWorkbench();
 
       playSound(660, 0.25, 'triangle');
+      showMentor('💡 Graph Mentor Hint', `ผมฉาย <b>Ghost Overlay สีทอง</b> ของโครงสร้างที่ยังไม่ปลดล็อกให้แล้ว ลองสังเกตจำนวน edges และ in/out-degree ก่อนลากตาม`, 'hint');
       document.getElementById('feed-box').innerHTML = `
         <span style="color:var(--gold); font-weight:bold">💡 คำใบ้สำหรับบทที่ #${target.id + 1}:</span>
         ต้องการเส้นเชื่อม <b>${target.edges} เส้น</b> | Degree: [${degrees.join(', ')}]
@@ -1033,11 +1153,13 @@
           cardEl.className = 'card unlocked highlight';
           cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           document.getElementById('feed-box').innerHTML = `<span style="color:var(--success); font-weight:bold">✨ ปลดล็อกสำเร็จ!</span> ค้นพบโครงสร้างแบบที่ #${matchIndex + 1} (${target.edges} เส้นเชื่อม)`;
+          showMentor('🌟 ค้นพบโครงสร้างใหม่!', `นี่คือ nonisomorphic class <b>#${matchIndex + 1}</b> ที่มี ${target.edges} directed edge(s) ระบบบันทึกลง Full Set Codex แล้ว`, 'success');
         } else {
           playSound(180, 0.2, 'sawtooth');
           cardEl.classList.add('highlight');
           cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           document.getElementById('feed-box').innerHTML = `<span style="color:var(--gold); font-weight:bold">💨 โครงสร้างซ้ำ (Isomorphic)!</span> กราฟที่คุณวาดมีโครงสร้างเดียวกันกับคัมภีร์ใบที่ #${matchIndex + 1}`;
+          showMentor('🔁 Isomorphic Duplicate', `หน้าตากราฟอาจต่างกัน แต่หลังเปลี่ยนชื่อ vertex แล้ว adjacency ตรงกับ <b>Class #${matchIndex + 1}</b> จึงไม่ใช่โครงสร้างใหม่`, 'hint');
         }
 
         ghostMatrix = null;
@@ -1056,15 +1178,16 @@
 
       let svg = `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
         <defs>
-          <marker id="m-arrow" markerWidth="6" markerHeight="6" refX="15" refY="3" orient="auto">
-            <polygon points="0 1, 5 3, 0 5" fill="#a855f7" />
+          <marker id="m-arrow" viewBox="0 0 10 10" markerWidth="5" markerHeight="5" refX="9" refY="5" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#a855f7" />
           </marker>
         </defs>`;
 
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
           if (mat[i][j]) {
-            svg += `<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[j].x}" y2="${pts[j].y}" stroke="#a855f7" stroke-width="1.5" marker-end="url(#m-arrow)" />`;
+            let p = straightEdgePoints(pts[i], pts[j], 8);
+            svg += `<line x1="${p.sx}" y1="${p.sy}" x2="${p.ex}" y2="${p.ey}" stroke="#a855f7" stroke-width="1.5" marker-end="url(#m-arrow)" />`;
           }
         }
       }
@@ -1193,11 +1316,11 @@
 
       let svg = `
         <defs>
-          <marker id="q-arrow-${elId}" markerWidth="8" markerHeight="8" refX="22" refY="4" orient="auto">
-            <polygon points="0 1, 7 4, 0 7" fill="#38bdf8" />
+          <marker id="q-arrow-${elId}" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
           </marker>
-          <marker id="q-arrow-bi-${elId}" markerWidth="8" markerHeight="8" refX="22" refY="4" orient="auto">
-            <polygon points="0 1, 7 4, 0 7" fill="#c084fc" />
+          <marker id="q-arrow-bi-${elId}" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#c084fc" />
           </marker>
         </defs>
       `;
@@ -1208,12 +1331,11 @@
             let u = pts[i], v = pts[j];
             let isBi = mat[j][i] === 1;
             if (isBi) {
-              let dx = v.x - u.x, dy = v.y - u.y;
-              let mx = (u.x + v.x) / 2 - dy * 0.22;
-              let my = (u.y + v.y) / 2 + dx * 0.22;
-              svg += `<path d="M${u.x},${u.y} Q${mx},${my} ${v.x},${v.y}" fill="none" stroke="#c084fc" stroke-width="2.5" marker-end="url(#q-arrow-bi-${elId})" />`;
+              let d = curvedEdgePath(u, v, 0.22, 18);
+              svg += `<path d="${d}" fill="none" stroke="#c084fc" stroke-width="2.5" marker-end="url(#q-arrow-bi-${elId})" />`;
             } else {
-              svg += `<line x1="${u.x}" y1="${u.y}" x2="${v.x}" y2="${v.y}" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#q-arrow-${elId})" />`;
+              let p = straightEdgePoints(u, v, 18);
+              svg += `<line x1="${p.sx}" y1="${p.sy}" x2="${p.ex}" y2="${p.ey}" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#q-arrow-${elId})" />`;
             }
           }
         }
