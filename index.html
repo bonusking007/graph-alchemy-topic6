@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graph Alchemy Academy v2.6 - Nonisomorphic Directed Graphs</title>
+  <title>Graph Alchemy Academy v2.7 - Nonisomorphic Directed Graphs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       /* SWU-inspired red / white / gray palette */
@@ -32,7 +35,7 @@
       --hint-text:#ffe2a8;
       --edge-main:#d0d0d0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
     /* Header & Navigation */
@@ -438,6 +441,109 @@
       .header-tools { justify-content:center; }
     }
 
+
+    /* ================= SWU-INSPIRED TYPOGRAPHY v2.7 =================
+       SWU identity guidance uses Srinakharinwirot for headlines and Sarabun for body copy.
+       The custom SWU display face remains the first fallback when installed; Sarabun is loaded
+       from Google Fonts so the project stays readable on GitHub Pages without bundling font files. */
+    :root {
+      --font-body: "Sarabun", Tahoma, Arial, sans-serif;
+      --font-heading: "Srinakharinwirot", "Sarabun", Tahoma, Arial, sans-serif;
+    }
+    html { font-size:16px; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+    body,button,input,select,textarea {
+      font-family:var(--font-body);
+      font-weight:400;
+      line-height:1.62;
+      letter-spacing:0;
+    }
+    h1,h2,h3,h4,h5,h6,.brand h1 {
+      font-family:var(--font-heading);
+      font-weight:800;
+      line-height:1.26;
+      letter-spacing:-.012em;
+    }
+    p,li,td,th,label,span { line-height:1.58; }
+    strong,b { font-weight:700; }
+
+    /* Main navigation: larger and calmer like the SWU website */
+    .brand h1 { font-size:1.28rem; }
+    .nav-tab { font-size:.9rem; font-weight:700; padding:9px 17px; border-radius:999px; }
+    .version-tag { font-family:var(--font-body); font-size:.75rem; font-weight:700; }
+    .tool-btn { font-family:var(--font-body); font-size:.86rem; }
+
+    /* Page headlines and section hierarchy */
+    .hero-learn h2,.settings-hero h2 { font-size:1.8rem; color:var(--text); }
+    .hero-learn p,.settings-hero p { font-size:.98rem; line-height:1.72; }
+    .lesson-card h3,.settings-card h3 { font-size:1.08rem; font-weight:800; }
+    .lesson-card p,.lesson-card li { font-size:.91rem; line-height:1.7; }
+    .codex-top h2 { font-family:var(--font-heading); font-size:1.42rem !important; font-weight:800 !important; line-height:1.28; }
+    .quiz-stats h2 { font-family:var(--font-heading); font-size:1.32rem !important; font-weight:800 !important; }
+    .bench-card h2,.bench-card h3 { font-family:var(--font-heading); }
+    .bench-card h2 { font-size:1.5rem !important; }
+    .bench-card h3 { font-size:1.14rem !important; }
+
+    /* Body copy: avoid tiny text that looked cramped */
+    .topic-pill { font-size:.82rem; font-weight:700; }
+    .professor-head { font-size:.98rem; }
+    .formula-box { font-size:.86rem; line-height:1.72; }
+    .application-card h4 { font-size:.98rem; font-weight:800; }
+    .application-card p { font-size:.86rem; line-height:1.68; }
+    .path-step b { font-size:.92rem; }
+    .path-step span { font-size:.79rem; }
+    .sub2-banner,.cap-note { font-size:.86rem; line-height:1.68; }
+    .math-panel,.feed-box,.bijection-box { font-size:.86rem; }
+    .degree-list,.matrix-view td,.matrix-view th { line-height:1.45; }
+    .chip { font-family:var(--font-body); font-size:.8rem; font-weight:600; padding:5px 11px; border-radius:999px; }
+    .btn-lvl { font-family:var(--font-body); font-size:.82rem; font-weight:700; padding:6px 11px; border-radius:999px; }
+
+    /* Buttons: strong Thai labels without feeling oversized */
+    .btn-main,.btn-sub,.btn-hint,.btn-choice,.check-btn,.preview-btn,.save-settings-btn {
+      font-family:var(--font-body);
+      font-weight:700;
+      letter-spacing:0;
+    }
+    .btn-main,.btn-sub,.btn-hint { font-size:.9rem; }
+    .btn-choice { font-size:1rem; }
+    .check-btn { font-size:.88rem; }
+
+    /* Quiz / explanations */
+    .quiz-stats p { font-size:.87rem !important; line-height:1.65; }
+    .quiz-explainer { font-size:.92rem; line-height:1.72; }
+    .graph-quiz-box > span { font-size:.85rem !important; }
+
+    /* Settings readability */
+    .settings-card p { font-size:.86rem; line-height:1.66; }
+    .setting-label b { font-size:.9rem; font-weight:700; }
+    .setting-label span { font-size:.79rem; line-height:1.45; }
+    .setting-select { font-family:var(--font-body); font-size:.86rem; }
+    .preview-btn { font-size:.82rem; }
+    .save-status { font-size:.82rem; }
+
+    /* Tables and benchmark values */
+    .bench-table { font-size:.9rem; }
+    .bench-table th { font-weight:700; }
+    .metric-val { font-family:var(--font-heading); font-weight:800; }
+
+    /* Guide copy */
+    .ai-mentor-title { font-family:var(--font-heading); font-size:.9rem; font-weight:800; }
+    .ai-mentor-text { font-size:.86rem; line-height:1.62; }
+
+    /* SWU-style red emphasis: headings stay dark; red is reserved for accents */
+    body[data-theme="light"] h1,body[data-theme="light"] h2,body[data-theme="light"] h3,
+    body[data-theme="light"] h4,body[data-theme="light"] .brand h1 { color:#202124; }
+    body[data-theme="light"] .lesson-card h3,
+    body[data-theme="light"] .application-card h4 { color:#252525; }
+    body[data-theme="light"] .nav-tab:not(.active) { color:#3f3f3f; }
+    body[data-theme="light"] .nav-tab.active { color:#fff; }
+
+    @media (max-width:760px) {
+      html { font-size:15px; }
+      .brand h1 { font-size:1.08rem; }
+      .hero-learn h2,.settings-hero h2 { font-size:1.52rem; }
+      .nav-tab { font-size:.82rem; padding:8px 12px; }
+    }
+
   </style>
 </head>
 <body>
@@ -446,7 +552,7 @@
     <div class="brand">
       <span style="font-size:1.3rem">🔮</span>
       <h1>Graph Alchemy Academy: Nonisomorphic Digraphs</h1>
-      <span class="version-tag">TOPIC 6 · v2.6</span>
+      <span class="version-tag">TOPIC 6 · v2.7</span>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" data-view="learn" onclick="switchView('learn')">🎓 Learn</button>
@@ -802,7 +908,7 @@
 
       <div class="changelog-box">
         <h4 style="color:var(--gold); margin-bottom:4px">ประวัติเวอร์ชันระบบ (Version History)</h4>
-        <div>• <b>v2.6 (Current):</b> ปรับธีมใหม่ให้ใกล้ภาพลักษณ์เว็บไซต์ มศว มากขึ้นด้วยแดง–ขาว–เทา, ล้างโทนน้ำเงิน/ม่วงที่หลงเหลือ, ปรับ Day Mode ให้ contrast อ่านได้ครบทุกส่วน และเปลี่ยนสี Node/Graph ให้เข้าชุดเดียวกัน<br>• <b>v2.5:</b> เพิ่มปุ่ม Save Settings, ระบบเอฟเฟกต์ที่บันทึกและนำไปใช้จริง, ระดับเสียงแยก Correct/Wrong และเอฟเฟกต์ตอบผิดแบบหนักขึ้น<br>• <b>v2.4:</b> Quiz Mix สุ่มโจทย์ง่าย–กลาง–ยาก, ผสม n=2/3/4, ลดโจทย์ซ้ำด้วย recent-signature history และเพิ่มคะแนนตามระดับความยาก</div>
+        <div>• <b>v2.7 (Current):</b> ปรับ Typography ให้ใกล้แนวทางเว็บไซต์ มศว มากขึ้น: ใช้ Sarabun สำหรับเนื้อหา, เพิ่ม hierarchy ของหัวข้อ/ปุ่ม/การ์ด, ขยายข้อความที่เล็กเกินไป และปรับระยะบรรทัดให้อ่านง่ายขึ้นทั้ง Day/Night Mode<br>• <b>v2.5:</b> เพิ่มปุ่ม Save Settings, ระบบเอฟเฟกต์ที่บันทึกและนำไปใช้จริง, ระดับเสียงแยก Correct/Wrong และเอฟเฟกต์ตอบผิดแบบหนักขึ้น<br>• <b>v2.4:</b> Quiz Mix สุ่มโจทย์ง่าย–กลาง–ยาก, ผสม n=2/3/4, ลดโจทย์ซ้ำด้วย recent-signature history และเพิ่มคะแนนตามระดับความยาก</div>
         <div>• <b>v2.2:</b> เพิ่ม Day/Night Theme, Settings สำหรับ Correct/Wrong Effects และเปลี่ยนผู้ช่วยลอยเป็น Alchemy Prism เพื่อให้มีเอกลักษณ์ของโปรเจกต์</div>
         <div>• <b>v2.1:</b> ปรับหัวลูกศรให้ชนขอบ node ถูกตำแหน่ง และเพิ่ม contextual guide</div>
         <div>• <b>v2.0:</b> เพิ่ม Professor Mode, Application, Quick Check, Local Progress และแก้คำอธิบาย Quiz</div>
