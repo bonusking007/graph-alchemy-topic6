@@ -1325,6 +1325,15 @@
     .podium-score { margin-top:8px; font-size:1.48rem; font-weight:1000; color:#ffd76a; }
     .podium-sub { margin-top:5px; color:#c9c9c9; font-size:.78rem; }
 
+    /* v6.1 leaderboard first-entry shine */
+    #view-leaderboard { position:relative; }
+    .leaderboard-shine-beam { position:absolute; z-index:80; top:-8px; bottom:-8px; left:0; width:28%; pointer-events:none; background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.03) 18%,rgba(255,231,139,.46) 48%,rgba(255,255,255,.18) 58%,transparent 100%); filter:blur(1px); mix-blend-mode:screen; transform:translateX(-180%) skewX(-13deg); animation:leaderboardSweep 1.18s cubic-bezier(.22,.72,.18,1) forwards; }
+    @keyframes leaderboardSweep { 0%{transform:translateX(-180%) skewX(-13deg);opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{transform:translateX(470%) skewX(-13deg);opacity:0} }
+    .podium-card.rank-1.champion-intro { animation:championIntroGlow 1.45s ease-out both; }
+    .podium-card.rank-1.champion-intro::after { content:''; position:absolute; inset:-35%; pointer-events:none; background:conic-gradient(from 20deg,transparent 0 38%,rgba(255,231,139,.58) 45%,transparent 52% 100%); animation:championSpinFlash 1.15s ease-out both; mix-blend-mode:screen; }
+    @keyframes championIntroGlow { 0%{box-shadow:0 15px 38px rgba(0,0,0,.24);filter:brightness(.88)} 32%{box-shadow:0 0 0 1px rgba(255,220,100,.45),0 0 46px rgba(250,204,21,.52),0 20px 50px rgba(0,0,0,.32);filter:brightness(1.26)} 100%{box-shadow:0 15px 38px rgba(0,0,0,.24);filter:none} }
+    @keyframes championSpinFlash { 0%{opacity:0;transform:rotate(-28deg) scale(.82)} 26%{opacity:1} 100%{opacity:0;transform:rotate(34deg) scale(1.14)} }
+
     .leaderboard-list { display:flex; flex-direction:column; gap:8px; }
     .leaderboard-row { display:grid; grid-template-columns:64px minmax(0,1fr) 130px 110px; gap:12px; align-items:center; padding:13px 16px; border:1px solid var(--border); border-radius:14px; background:var(--surface); transition:.18s ease; }
     .leaderboard-row:hover { transform:translateY(-1px); border-color:rgba(215,25,32,.45); }
@@ -1379,7 +1388,7 @@
     <div class="brand">
       <span style="font-size:1.3rem">🔮</span>
       <h1>Graph Academy Lab: Non-isomorphic Digraphs</h1>
-      <span class="version-tag">TOPIC 6 · v5.9</span>
+      <span class="version-tag">TOPIC 6 · v6.1</span>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" data-view="learn" onclick="switchView('learn')">🎓 Learn</button>
@@ -2378,8 +2387,8 @@
       const view = document.getElementById(`view-${viewName}`);
       if (tab) tab.classList.add('active');
       if (view) view.classList.add('active');
-      if (viewName === 'quiz') generateQuizQuestion();
-      if (viewName === 'leaderboard') loadLeaderboard();
+      if (viewName === 'quiz' && !currentMatA) generateQuizQuestion();
+      if (viewName === 'leaderboard') { playLeaderboardEntranceEffect(); loadLeaderboard(); }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -3334,7 +3343,7 @@
       const gallery=document.getElementById('quiz-item-gallery');
       const select=document.getElementById('quiz-item-select');
       if(!gallery) return;
-      const selected=armedQuizItem || (select?.value||'');
+      const selected=armedQuizItem || queuedQuizItem || (select?.value||'');
       const owned=Object.entries(SHOP_ITEMS).filter(([key]) => (quizInventory[key]||0) > 0);
       const signature=owned.map(([key])=>`${key}:${quizInventory[key]||0}`).join('|');
 
@@ -3370,14 +3379,15 @@
       const box=document.getElementById('quiz-item-preview');
       const select=document.getElementById('quiz-item-select');
       if(!box) return;
-      const key=armedQuizItem || (select?.value||'');
+      const key=armedQuizItem || queuedQuizItem || (select?.value||'');
       if(!key || !SHOP_ITEMS[key]){
         box.style.display='none';
         box.innerHTML='';
         return;
       }
       box.style.display='block';
-      box.innerHTML = buildQuizItemCard(key,{ armed: armedQuizItem===key, auto: autoQuizItem===key && armedQuizItem!==key, stateText: armedQuizItem===key ? 'พร้อมใช้ในข้อนี้' : (autoQuizItem===key ? 'ตั้ง Auto อยู่' : 'เลือกอยู่') });
+      const queued=queuedQuizItem===key && !armedQuizItem;
+      box.innerHTML = buildQuizItemCard(key,{ armed: armedQuizItem===key, auto: autoQuizItem===key && armedQuizItem!==key && !queued, stateText: armedQuizItem===key ? 'พร้อมใช้ในข้อนี้' : (queued ? 'เตรียมใช้ข้อต่อไป' : (autoQuizItem===key ? 'ตั้ง Auto อยู่' : 'เลือกอยู่')), footRight: queued ? 'ยังไม่หักไอเทม · จะหักเมื่อเริ่มข้อใหม่' : undefined });
     }
 
     function renderQuizInventory(){
@@ -3430,12 +3440,12 @@
       const name=document.getElementById('quiz-item-summary-name');
       const count=document.getElementById('quiz-item-summary-count');
       if(!art || !name || !count) return;
-      const key=armedQuizItem || (select?.value||'') || autoQuizItem;
+      const key=armedQuizItem || queuedQuizItem || (select?.value||'') || autoQuizItem;
       if(key && SHOP_ITEMS[key]){
         const item=SHOP_ITEMS[key];
         art.innerHTML=`<img src="${item.image}" alt="${item.name}">`;
         name.textContent=item.name;
-        count.textContent=`x${quizInventory[key]||0}${armedQuizItem===key?' · ใช้อยู่':''}`;
+        count.textContent=`x${quizInventory[key]||0}${armedQuizItem===key?' · ใช้อยู่':queuedQuizItem===key?' · ข้อต่อไป':''}`;
       }else{
         art.innerHTML='<svg viewBox="0 0 32 32"><rect x="14" y="13" width="5" height="16" rx="1" transform="rotate(45 16.5 21)" fill="#8b5a2b"/><rect x="6" y="7" width="5" height="5" fill="#94a3b8"/><rect x="11" y="4" width="5" height="5" fill="#cbd5e1"/><rect x="16" y="4" width="5" height="5" fill="#e2e8f0"/><rect x="21" y="7" width="5" height="5" fill="#94a3b8"/><rect x="11" y="9" width="10" height="5" fill="#22d3ee"/><rect x="14" y="14" width="5" height="5" fill="#67e8f9"/></svg>';
         name.textContent='ยังไม่เลือก';
@@ -3446,7 +3456,15 @@
     function updateQuizItemSelection(){
       const select=document.getElementById('quiz-item-select');
       const btn=document.getElementById('use-item-btn');
-      if(btn) btn.disabled=!select?.value || armedQuizItem!=='';
+      if(btn){
+        if(quizQuestionAnswered){
+          btn.disabled=!select?.value;
+          btn.textContent=queuedQuizItem ? 'เปลี่ยนไอเทมข้อต่อไป' : 'ใช้ในข้อต่อไป';
+        }else{
+          btn.disabled=!select?.value || armedQuizItem!=='';
+          btn.textContent='ใช้ไอเทม';
+        }
+      }
       syncAutoUseUI();
       renderQuizItemGallery();
       renderQuizItemPreview();
@@ -3493,6 +3511,14 @@
     function armSelectedQuizItem(){
       const select=document.getElementById('quiz-item-select');
       const key=select?.value||'';
+      if(!key || !SHOP_ITEMS[key] || (quizInventory[key]||0)<=0) return;
+      if(quizQuestionAnswered){
+        queuedQuizItem=key;
+        const status=document.getElementById('armed-item-status');
+        if(status) status.textContent=`เตรียมใช้: ${SHOP_ITEMS[key].name} ในข้อต่อไป (ยังไม่หักไอเทม)`;
+        updateQuizItemSelection();
+        return;
+      }
       armQuizItemByKey(key,false);
     }
 
@@ -3677,6 +3703,36 @@
       el.textContent=text;
       el.className='leaderboard-status'+(mode?' '+mode:'');
     }
+    let leaderboardEntrancePlayed = false;
+    let leaderboardRankOneShinePlayed = false;
+
+    function playLeaderboardEntranceEffect(){
+      if(leaderboardEntrancePlayed) return;
+      leaderboardEntrancePlayed=true;
+      const view=document.getElementById('view-leaderboard');
+      if(!view) return;
+      const beam=document.createElement('div');
+      beam.className='leaderboard-shine-beam';
+      view.appendChild(beam);
+      setTimeout(()=>beam.remove(),1350);
+      try{
+        playSound(740,.07,'sine');
+        setTimeout(()=>playSound(980,.08,'sine'),95);
+        setTimeout(()=>playSound(1320,.10,'triangle'),190);
+      }catch(e){}
+    }
+
+    function playRankOneChampionShine(){
+      if(!leaderboardEntrancePlayed || leaderboardRankOneShinePlayed) return;
+      const card=document.querySelector('#leaderboard-podium .podium-card.rank-1');
+      if(!card) return;
+      leaderboardRankOneShinePlayed=true;
+      card.classList.remove('champion-intro');
+      void card.offsetWidth;
+      card.classList.add('champion-intro');
+      setTimeout(()=>card.classList.remove('champion-intro'),1550);
+    }
+
     async function syncLeaderboardScore(){
       const client=initLeaderboardClient();
       const username=getPlayerUsername();
@@ -3712,6 +3768,7 @@
       const data=Array.isArray(rows)?rows:[];
       const top=[data[1],data[0],data[2]];
       podium.innerHTML=podiumCard(top[0],2)+podiumCard(top[1],1)+podiumCard(top[2],3);
+      requestAnimationFrame(()=>playRankOneChampionShine());
       const rest=data.slice(3,10);
       if(!rest.length){
         list.innerHTML=data.length?'<div class="leaderboard-empty">อันดับ 4–10 ยังว่างอยู่ — ไปทำ Quiz เพื่อขึ้นทำเนียบ!</div>':'<div class="leaderboard-empty">ยังไม่มีผู้เล่นบน Leaderboard</div>';
@@ -3798,6 +3855,8 @@
     let currentMatA = null;
     let currentMatB = null;
     let currentPermB = null;
+    let quizQuestionAnswered = false;
+    let queuedQuizItem = '';
     let quizRecentSignatures = [];
     let quizDifficultyBag = [];
     const quizCache = new Map();
@@ -4083,7 +4142,14 @@
       stopQuizTransientEffects();
       const graphWrap=document.querySelector('#view-quiz .quiz-graphs');
       if(graphWrap) graphWrap.classList.add('quiz-swapping');
-      clearArmedItem();
+      const carriedItem=(!quizQuestionAnswered && armedQuizItem) ? armedQuizItem : '';
+      if(carriedItem){
+        armedQuizItem='';
+        setQuizItemPreview('');
+      }else{
+        clearArmedItem();
+      }
+      quizQuestionAnswered=false;
       document.getElementById('quiz-explainer').style.display = 'none';
       document.getElementById('btn-next-quiz').style.display = 'none';
       document.getElementById('quiz-btn-group').style.display = 'flex';
@@ -4118,8 +4184,21 @@
       renderStaticSVG('quiz-svg-a', currentMatA, currentQuizN, currentQuizLabelsA);
       renderStaticSVG('quiz-svg-b', currentMatB, currentQuizN, currentQuizLabelsB);
       requestAnimationFrame(()=>requestAnimationFrame(()=>graphWrap?.classList.remove('quiz-swapping')));
-      tryAutoArmQuizItem();
-      applyArmedItemPreview();
+      if(carriedItem && SHOP_ITEMS[carriedItem]){
+        armedQuizItem=carriedItem;
+        const status=document.getElementById('armed-item-status');
+        if(status) status.textContent=`พร้อมใช้: ${SHOP_ITEMS[carriedItem].name} ในข้อนี้`;
+        updateQuizItemSelection();
+        applyArmedItemPreview();
+      }else if(queuedQuizItem && SHOP_ITEMS[queuedQuizItem] && (quizInventory[queuedQuizItem]||0)>0){
+        const queued=queuedQuizItem;
+        queuedQuizItem='';
+        armQuizItemByKey(queued,false);
+      }else{
+        queuedQuizItem='';
+        tryAutoArmQuizItem();
+        applyArmedItemPreview();
+      }
       showMentor('◇ Quiz', `ข้อที่ <b>${quizQuestionNumber}</b> · ระดับ <b>${currentQuizDifficulty === 'easy' ? 'ง่าย' : currentQuizDifficulty === 'medium' ? 'กลาง' : 'ยาก'}</b> · n=${currentQuizN}<br>Labels ถูกสุ่มใหม่แล้ว — อย่าตัดสินจากชื่อจุดยอด ให้ดูโครงสร้างและทิศทางของ edge`, 'info');
     }
 
@@ -4290,6 +4369,7 @@
     }
 
     function answerQuiz(userGuess) {
+      quizQuestionAnswered=true;
       document.getElementById('quiz-btn-group').style.display = 'none';
       document.getElementById('btn-next-quiz').style.display = 'block';
       const explainer = document.getElementById('quiz-explainer');
@@ -4393,6 +4473,7 @@
       }
 
       clearArmedItem();
+      updateQuizItemSelection();
       saveQuizState();
       saveEconomyState();
       updateLeaderboardMyCard();
